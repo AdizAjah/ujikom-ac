@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // TAMBAHAN: Kolom untuk membedakan admin dan user
+            $table->string('role')->default('user'); // 'user' atau 'admin'
+            $table->text('address')->nullable(); // Alamat untuk pengiriman / booking
+            $table->string('phone')->nullable(); // No. HP untuk booking
             $table->rememberToken();
             $table->timestamps();
         });

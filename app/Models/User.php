@@ -21,28 +21,44 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Tambahkan 'role'
+        'address', // Tambahkan 'address'
+        'phone', // Tambahkan 'phone'
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
-     */
+// ... existing code ...
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+// ... existing code ...
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+// ... existing code ...
             'password' => 'hashed',
         ];
+    }
+
+    // --- TAMBAHAN RELASI ---
+
+    /**
+     * Relasi ke Booking
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    /**
+     * Relasi ke Order
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
