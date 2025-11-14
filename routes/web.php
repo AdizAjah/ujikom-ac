@@ -19,8 +19,9 @@ use App\Http\Controllers\BookingController; // <-- CONTROLLER BARU
 
 // === RUTE HALAMAN PUBLIK ===
 Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/about', [PublicController::class, 'about'])->name('about');
 Route::get('/services', [PublicController::class, 'services'])->name('services');
-Route::get('/products', [PublicController::class, 'products'])->name('products');
+// Route::get('/products', [PublicController::class, 'products'])->name('products');
 Route::get('/gallery', [PublicController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -33,7 +34,7 @@ Route::get('/dashboard', function () {
         return redirect()->route('admin.dashboard');
     }
     // Arahkan user ke halaman 'My Bookings' sebagai dashboard utama mereka
-    return redirect()->route('my-bookings');
+    return redirect()->route('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Rute Profil Bawaan Breeze
@@ -46,7 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/booking/service/{service}', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/my-bookings', [BookingController::class, 'index'])->name('my-bookings');
-    // TODO: Tambahkan rute untuk 'My Orders' di langkah berikutnya
 });
 
 // === GRUP RUTE ADMIN ===
@@ -57,7 +57,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('services', AdminServiceController::class);
     Route::resource('gallery', AdminGalleryController::class)->only(['index', 'store', 'destroy']);
     Route::resource('bookings', AdminBookingController::class)->only(['index', 'update', 'show']);
-    Route::resource('orders', AdminOrderController::class)->only(['index', 'update', 'show']);
+    // Route::resource('orders', AdminOrderController::class)->only(['index', 'update', 'show']);
     Route::resource('contacts', AdminContactMessageController::class)->only(['index', 'show', 'destroy']);
 
 });

@@ -22,6 +22,19 @@ class PublicController extends Controller
     }
 
     /**
+     * Menampilkan halaman Tentang Kami
+     */
+    public function about()
+    {
+        return view('pages.about');
+    }
+
+    public function booking()
+    {
+        return view('pages.my-bookings', compact('bookings'));
+    }
+
+    /**
      * Menampilkan semua Jasa
      */
     public function services()

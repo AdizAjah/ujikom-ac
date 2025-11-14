@@ -20,12 +20,12 @@
                             <a href="{{ route('admin.bookings.index') }}" class="text-sm text-blue-600 dark:text-blue-300 hover:underline mt-4 inline-block">View Bookings</a>
                         </div>
 
-                        <!-- New Orders -->
+                        {{-- <!-- New Orders -->
                         <div class="bg-green-100 dark:bg-green-900 p-6 rounded-lg shadow">
                             <h3 class="text-lg font-semibold text-green-800 dark:text-green-200">New Product Orders</h3>
                             <p class="text-3xl font-bold mt-2">{{ $newOrders }}</p>
                             <a href="{{ route('admin.orders.index') }}" class="text-sm text-green-600 dark:text-green-300 hover:underline mt-4 inline-block">View Orders</a>
-                        </div>
+                        </div> --}}
 
                         <!-- New Messages -->
                         <div class="bg-yellow-100 dark:bg-yellow-900 p-6 rounded-lg shadow">

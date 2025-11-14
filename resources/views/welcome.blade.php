@@ -44,7 +44,7 @@
         </div>
 
         <!-- Bagian Produk AC -->
-        <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-12">
+        {{-- <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg my-12">
             <div class="p-6 md:p-10">
                 <h2 class="text-3xl font-bold mb-6 text-center">Produk Unit AC Terbaru</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -55,9 +55,9 @@
                                 <h3 class="text-lg font-semibold mb-2 truncate" title="{{ $product->name }}">{{ $product->name }}</h3>
                                 <div class="text-xl font-bold text-blue-600 dark:text-blue-400 mb-4">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
-                                </div>
+                                </div> --}}
                                 {{-- Kita akan perbaiki link ini di langkah berikutnya (Keranjang Belanja) --}}
-                                <a href="#" class="w-full text-center inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+                                {{-- <a href="#" class="w-full text-center inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">
                                     Lihat Detail
                                 </a>
                             </div>
@@ -70,7 +70,7 @@
                     <a href="{{ route('products') }}" class="text-blue-600 dark:text-blue-400 hover:underline">Lihat Semua Produk &rarr;</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 @endsection
