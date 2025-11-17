@@ -37,20 +37,30 @@ class BookingController extends Controller
      * Menyimpan booking baru ke database
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'service_id' => 'required|exists:services,id',
-            'booking_date' => 'required|date|after_or_equal:today',
-            'user_address' => 'required|string|max:1000',
-            'user_phone' => 'required|string|max:20',
-            'notes' => 'nullable|string|max:1000',
-        ]);
+{
+    $request->validate([
+        'service_id'    => 'required|exists:services,id',
+        'booking_date'  => 'required|date_format:Y-m-d|after_or_equal:today',
+        'user_phone'    => [
+            'required',
+            'regex:/^628[0-9]{8,13}$/'
+        ],
+        'user_address'  => 'required|string|min:5',
+        'notes'         => 'nullable|string',
+    ]);
 
-        // Tambahkan user_id ke data yang divalidasi
-        $validated['user_id'] = Auth::id();
+    // Simpan booking
+    Booking::create([
+        'service_id'   => $request->service_id,
+        'user_id'      => auth()->id(),
+        'booking_date' => $request->booking_date,
+        'user_phone'   => $request->user_phone,
+        'user_address' => $request->user_address,
+        'notes'        => $request->notes,
+        'status'       => 'pending'
+    ]);
 
-        Booking::create($validated);
+    return redirect()->route('my-bookings')->with('success', 'Booking Anda telah berhasil dibuat! Kami akan segera menghubungi Anda untuk konfirmasi.');
+}
 
-        return redirect()->route('my-bookings')->with('success', 'Booking Anda telah berhasil dibuat! Kami akan segera menghubungi Anda untuk konfirmasi.');
-    }
 }
