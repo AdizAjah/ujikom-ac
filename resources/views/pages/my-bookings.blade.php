@@ -1,8 +1,10 @@
 @extends('layouts.public')
 
-@section('title', 'Riwayat Booking')
+@section('title', 'Kontak Kami')
 
 @section('content')
+
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -35,13 +37,14 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{ \Carbon\Carbon::parse($booking->booking_date)->format('d M Y, H:i') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">Rp {{ number_format($booking->service->price, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                            @if($booking->status == 'pending') bg-yellow-100 text-yellow-800 @endif
-                                            @if($booking->status == 'confirmed') bg-blue-100 text-blue-800 @endif
-                                            @if($booking->status == 'processing') bg-indigo-100 text-indigo-800 @endif
-                                            @if($booking->status == 'completed') bg-green-100 text-green-800 @endif
-                                            @if($booking->status == 'cancelled') bg-red-100 text-red-800 @endif
+                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full
+                                            @if($booking->status == 'pending') bg-amber-100 text-amber-800 dark:bg-amber-900/20 dark:text-amber-300 @endif
+                                            @if($booking->status == 'confirmed') bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300 @endif
+                                            @if($booking->status == 'processing') bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-300 @endif
+                                            @if($booking->status == 'completed') bg-primary-100 text-primary-800 dark:bg-primary-900/20 dark:text-primary-300 @endif
+                                            @if($booking->status == 'cancelled') bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-300 @endif
                                         ">
+                                            <i class="fas fa-circle mr-1 text-xs"></i>
                                             {{ ucfirst($booking->status) }}
                                         </span>
                                     </td>
@@ -61,4 +64,8 @@
             </div>
         </div>
     </div>
+    
+</body>
+</html>
+   
 @endsection
