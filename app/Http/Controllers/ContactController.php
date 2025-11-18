@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ContactMessage;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -12,8 +13,13 @@ class ContactController extends Controller
      */
     public function contact()
     {
+        // if (!Auth::check()) {
+        //     return redirect()->route('login');
+        // }
+        // $email = Auth::user()->email;
         return view('pages.contact');
     }
+
 
     /**
      * Menyimpan pesan dari form kontak
@@ -22,7 +28,6 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|min:10',
         ]);

@@ -41,6 +41,7 @@ class BookingController extends Controller
     $request->validate([
         'service_id'    => 'required|exists:services,id',
         'booking_date'  => 'required|date_format:Y-m-d|after_or_equal:today',
+        'booking_time' => 'required|date_format:H:i',
         'user_phone'    => [
             'required',
             'regex:/^628[0-9]{8,13}$/'
@@ -52,8 +53,9 @@ class BookingController extends Controller
     // Simpan booking
     Booking::create([
         'service_id'   => $request->service_id,
-        'user_id'      => auth()->id(),
+        'user_id'      => Auth::id(),
         'booking_date' => $request->booking_date,
+        'booking_time' => $request->booking_time,
         'user_phone'   => $request->user_phone,
         'user_address' => $request->user_address,
         'notes'        => $request->notes,

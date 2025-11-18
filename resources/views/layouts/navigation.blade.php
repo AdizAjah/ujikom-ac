@@ -18,18 +18,18 @@
                         <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                             {{ __('Admin Dashboard') }}
                         </x-nav-link>
-                        {{-- <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.*')">
                             {{ __('Products') }}
-                        </x-nav-link> --}}
+                        </x-nav-link>
                         <x-nav-link :href="route('admin.services.index')" :active="request()->routeIs('admin.services.*')">
                             {{ __('Services') }}
                         </x-nav-link>
                         <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
                             {{ __('Bookings') }}
                         </x-nav-link>
-                        {{-- <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
+                        <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
                             {{ __('Orders') }}
-                        </x-nav-link> --}}
+                        </x-nav-link>
                         <x-nav-link :href="route('admin.gallery.index')" :active="request()->routeIs('admin.gallery.*')">
                             {{ __('Gallery') }}
                         </x-nav-link>

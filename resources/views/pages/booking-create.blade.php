@@ -52,6 +52,33 @@
                         <p class="text-sm text-gray-500 mt-1">Pilih hanya tanggal kedatangan teknisi.</p>
                     </div>
 
+                    <div>
+                        <label for="booking_time" class="block font-medium text-sm text-gray-700 dark:text-gray-300">
+                            Jam Booking
+                        </label>
+                    
+                        <div class="mt-2 space-y-2">
+                            @foreach (['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00'] as $time)
+                                <label class="flex items-center gap-2">
+                                    <input 
+                                        type="radio" 
+                                        name="booking_time" 
+                                        value="{{ $time }}" 
+                                        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 
+                                               dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 
+                                               focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded shadow-sm"
+                                        @checked(old('booking_time') == $time)
+                                        required
+                                    >
+                                    <span>{{ $time }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    
+                        <p class="text-sm text-gray-500 mt-1">Pilih hanya waktu kedatangan teknisi.</p>
+                    </div>
+                    
+
                     <!-- No. Telepon -->
                     <div class="mt-4">
                         <label for="user_phone" class="block font-medium text-sm text-gray-700 dark:text-gray-300">
@@ -65,7 +92,6 @@
                                type="text"
                                name="user_phone"
                                placeholder="628xxxxxxxxxx"
-                               value="{{ old('user_phone', Auth::user()->phone) }}"
                                required />
                         <p class="text-sm text-gray-500 mt-1">Format wajib: 628xxxxxxxxxx (tidak boleh 08…)</p>
                     </div>

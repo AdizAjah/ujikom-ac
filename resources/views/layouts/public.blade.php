@@ -38,7 +38,7 @@
                     <div class="hidden sm:flex sm:items-center sm:space-x-8">
                         <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About Us</a>
                         <a href="{{ route('services') }}" class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}">Booking Service</a>
-                        {{-- <a href="{{ route('products') }}" class="nav-link {{ request()->routeIs('products') ? 'active' : '' }}">Unit AC</a> --}}
+                        <a href="{{ route('products') }}" class="nav-link {{ request()->routeIs('products') ? 'active' : '' }}">Unit AC</a>
                         <a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a>
                         <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact Us</a>
                         @auth
@@ -123,10 +123,47 @@
         </main>
 
         <!-- Footer -->
-        <footer class="bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 mt-auto">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500 dark:text-gray-400 text-sm">
-                &copy; {{ date('Y') }} Mega Jaya AC. All rights reserved.
+        <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-auto">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-gray-600 dark:text-gray-300 text-sm">
+        
+                    <!-- Brand & Deskripsi -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Mega Jaya AC</h3>
+                        <p class="leading-relaxed">
+                            Penyedia jasa service, instalasi, dan maintenance AC terpercaya untuk rumah, kantor, hingga industri.
+                            Kualitas terbaik, teknisi profesional, dan pelayanan cepat.
+                        </p>
+                    </div>
+        
+                    <!-- Kontak -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Kontak Kami</h3>
+                        <ul class="space-y-2">
+                            <li>📍 <span class="ml-1">Perum Bumi Mas Indah, Blok B8 No 11, Kel Sumber Jaya Kec Tambun Selatan Kab Bekasi</span></li>
+                            <li>📞 <span class="ml-1">+62 819 1019 5535</span></li>
+                            <li>✉️ <span class="ml-1">megajaya.ac@gmail.com</span></li>
+                        </ul>
+                    </div>
+        
+                    <!-- Sosial Media & Jam Operasional -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Informasi</h3>
+        
+                        <p class="mb-3 font-semibold">Ikuti Kami</p>
+                        <div class="flex space-x-4 text-blue-600 dark:text-blue-400">
+                            <a href="https://www.tiktok.com/@mega.ac.jaya" class="hover:underline">Tiktok</a>
+                            <a href="https://www.instagram.com/mega_ac_jaya" class="hover:underline">Instagram</a>
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <div class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700 text-center text-gray-500 dark:text-gray-400 text-xs">
+                    &copy; {{ date('Y') }} Mega AC Jaya — All rights reserved.
+                </div>
             </div>
-        </footer>
+        </footer>        
     </body>
 </html>
