@@ -112,7 +112,7 @@
                     <span class="text-sm font-medium">Layanan AC Profesional & Terpercaya</span>
                 </div>
                 
-                <img src="/images/logo.jpg" alt="Mega Jaya AC Logo" class="mx-auto mb-6 w-32 h-32 object-contain">
+                <img src="/images/logo.jpg" alt="Mega Jaya AC Logo" class="mx-auto mb-6 w-32 h-32 object-contain shadow-2xl rounded-full">
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                     Solusi
                     <span class="text-white/90">Pendingin Ruangan</span>

@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -129,9 +130,7 @@
                                 <img src="{{ asset('images/logo.jpg') }}" alt="Mega Jaya AC Logo" class="h-12 w-auto rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 green-glow">
                                 <div class="absolute inset-0 rounded-xl bg-green-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                             </div>
-                            <span class="text-xl font-bold bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 bg-clip-text text-transparent hidden md:block">
-                                Mega Jaya AC
-                            </span>
+
                         </a>
                     </div>
 
