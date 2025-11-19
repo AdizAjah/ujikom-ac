@@ -148,6 +148,10 @@
                             <i class="fas fa-images mr-2 text-sm"></i>
                             Gallery
                         </a>
+                        <a href="{{ route('products') }}" class="nav-link {{ request()->routeIs('products') ? 'active' : '' }}">
+                            <i class="fas fa-box mr-2 text-sm"></i>
+                            AC Unit
+                        </a>
                         <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">
                             <i class="fas fa-envelope mr-2 text-sm"></i>
                             Contact Us
