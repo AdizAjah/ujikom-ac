@@ -38,10 +38,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->dateTime('booking_date'); // Tanggal & jam yang diminta user
-            $table->string('booking_time'); // Jam yang diminta user
             $table->text('user_address'); // Alamat user saat booking
             $table->string('user_phone'); // No HP user saat booking
             $table->text('notes')->nullable(); // Catatan dari user
+
             $table->string('status')->default('pending'); // e.g., pending, confirmed, processing, completed, cancelled
             $table->timestamps();
         });
