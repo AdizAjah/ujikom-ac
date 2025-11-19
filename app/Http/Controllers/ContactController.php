@@ -13,10 +13,6 @@ class ContactController extends Controller
      */
     public function contact()
     {
-        // if (!Auth::check()) {
-        //     return redirect()->route('login');
-        // }
-        // $email = Auth::user()->email;
         return view('pages.contact');
     }
 
@@ -28,6 +24,7 @@ class ContactController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|min:10',
         ]);
