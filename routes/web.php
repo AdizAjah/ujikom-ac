@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ContactMessageController as AdminContactMessageController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 // Import Controller Publik
 use App\Http\Controllers\PublicController;
@@ -59,6 +60,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('bookings', AdminBookingController::class)->only(['index', 'update', 'show']);
     // Route::resource('orders', AdminOrderController::class)->only(['index', 'update', 'show']);
     Route::resource('contacts', AdminContactMessageController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('users', AdminUserController::class);
 
 });
 

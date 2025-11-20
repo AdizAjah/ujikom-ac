@@ -290,10 +290,6 @@
                             <i class="fab fa-whatsapp text-green-500 text-xl"></i>
                             Chat WhatsApp
                         </a>
-                        <a href="tel:+6281234567890" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-6 rounded-xl hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="fas fa-phone"></i>
-                            Telepon Sekarang
-                        </a>
                     </div>
                     
                     <!-- Info Tambahan -->

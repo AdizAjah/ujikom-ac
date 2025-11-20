@@ -347,7 +347,7 @@
             const form = document.getElementById('booking-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 // Simple validation
                 const errors = [];
                 const bookingDate = document.getElementById('booking_date').value;
@@ -368,10 +368,10 @@
                     errors.push('Alamat harus diisi');
                 }
 
-                // Show errors or success
+                // Show errors or submit form
                 const errorDisplay = document.getElementById('error-display');
                 const errorList = document.getElementById('error-list');
-                
+
                 if (errors.length > 0) {
                     errorList.innerHTML = '';
                     errors.forEach(error => {
@@ -380,12 +380,13 @@
                         errorList.appendChild(li);
                     });
                     errorDisplay.classList.remove('hidden');
-                    
+
                     // Scroll to errors
                     errorDisplay.scrollIntoView({ behavior: 'smooth' });
                 } else {
                     errorDisplay.classList.add('hidden');
-                    showSuccessModal();
+                    // Submit the form to create booking
+                    form.submit();
                 }
             });
         });
