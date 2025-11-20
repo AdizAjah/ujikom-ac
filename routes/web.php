@@ -52,13 +52,16 @@ Route::middleware('auth')->group(function () {
 // === GRUP RUTE ADMIN ===
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    
+    // Rute Khusus Hapus Gambar Service
+    Route::delete('/services/image/{id}', [AdminServiceController::class, 'destroyImage'])->name('services.image.destroy');
+
     Route::resource('products', AdminProductController::class);
     Route::resource('services', AdminServiceController::class);
     Route::resource('gallery', AdminGalleryController::class)->only(['index', 'store', 'destroy']);
     Route::resource('bookings', AdminBookingController::class)->only(['index', 'update', 'show']);
     Route::resource('orders', AdminOrderController::class)->only(['index', 'update', 'show']);
     Route::resource('contacts', AdminContactMessageController::class)->only(['index', 'show', 'destroy']);
-
 });
 
 
