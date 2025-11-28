@@ -41,6 +41,7 @@ return new class extends Migration
             $table->text('user_address'); // Alamat user saat booking
             $table->string('user_phone'); // No HP user saat booking
             $table->text('notes')->nullable(); // Catatan dari user
+
             $table->string('status')->default('pending'); // e.g., pending, confirmed, processing, completed, cancelled
             $table->timestamps();
         });

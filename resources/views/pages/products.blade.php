@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.app')
 
 @section('title', 'Produk Unit AC')
 
@@ -40,14 +40,18 @@
                 @forelse ($products as $product)
                     <div class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg card-hover border border-gray-100 dark:border-gray-700 group">
                         <!-- Image -->
-                        <div class="relative aspect-square overflow-hidden">
-                            <img src="{{ Storage::url($product->image_url) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="relative aspect-square overflow-hidden bg-gray-50 dark:bg-gray-900 cursor-pointer" onclick="openImageModal('{{ Storage::url($product->image_url) }}', '{{ $product->name }}')">
+                            <img src="{{ Storage::url($product->image_url) }}" alt="{{ $product->name }}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                             <div class="absolute top-4 right-4">
                                 <span class="bg-primary-500 text-white text-xs font-semibold py-1 px-3 rounded-full shadow-md">
                                     <i class="fas fa-star mr-1"></i>4.9
                                 </span>
                             </div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <div class="bg-white/90 dark:bg-gray-800/90 rounded-full p-3 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                                    <i class="fas fa-search-plus text-primary-600 dark:text-primary-400 text-xl"></i>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Content -->
@@ -143,4 +147,55 @@
             </div>
         @endif
     </div>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+        <div class="relative max-w-7xl max-h-full w-full h-full flex items-center justify-center">
+            
+            <!-- Image Container -->
+            <div class="relative max-w-full max-h-full flex items-center justify-center" onclick="event.stopPropagation()">
+                <img id="modalImage" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl">
+                
+                <!-- Image Title -->
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+                    <h3 id="modalImageTitle" class="text-white text-xl font-semibold text-center"></h3>
+                </div>
+            </div>
+
+            <!-- Navigation Hint -->
+            <!-- <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/60 text-sm">
+                <i class="fas fa-mouse-pointer mr-2"></i>Klik di luar gambar untuk menutup
+            </div> -->
+        </div>
+    </div>
+
+    <script>
+        function openImageModal(imageUrl, imageName) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalImageTitle = document.getElementById('modalImageTitle');
+            
+            modalImage.src = imageUrl;
+            modalImage.alt = imageName;
+            modalImageTitle.textContent = imageName;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
 @endsection

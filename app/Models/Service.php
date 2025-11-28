@@ -14,7 +14,10 @@ class Service extends Model
         'description',
         'price',
     ];
-
+    public function images()
+    {
+        return $this->hasMany(ServiceImage::class);
+    }
     /**
      * Relasi ke Booking
      */

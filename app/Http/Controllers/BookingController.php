@@ -44,7 +44,7 @@ class BookingController extends Controller
         'user_phone'    => [
             'required',
             'regex:/^628[0-9]{8,13}$/'
-        ],
+        ], 
         'user_address'  => 'required|string|min:5',
         'notes'         => 'nullable|string',
     ]);
@@ -52,7 +52,7 @@ class BookingController extends Controller
     // Simpan booking
     Booking::create([
         'service_id'   => $request->service_id,
-        'user_id'      => auth()->id(),
+        'user_id'      => Auth::id(),
         'booking_date' => $request->booking_date,
         'user_phone'   => $request->user_phone,
         'user_address' => $request->user_address,

@@ -1,11 +1,13 @@
-# TODO: Make "Konfirmasi Booking" Button Functional
+# TODO: Add Navbar to Welcome Page
 
 ## Tasks
-- [ ] Add proper form attributes (action, method, CSRF token)
-- [ ] Add hidden service_id field
-- [ ] Modify JavaScript to submit form instead of just showing modal
-- [ ] Test the booking creation functionality
+- [x] Add navbar HTML to welcome.blade.php before the hero section
+- [x] Include navigation links for Home, About, Services, Gallery, Products, Contact
+- [x] Add login and register buttons
+- [x] Ensure navbar is responsive
+- [x] Test that routes work correctly
 
-## Status
-- [x] Plan approved by user
-- [ ] Implementation in progress
+## Notes
+- Navbar should match the style of about.blade.php navbar
+- Use Laravel route helpers for links
+- Navbar should be fixed at top

@@ -1,8 +1,3 @@
-@extends('layouts.public')
-
-@section('title', 'Home')
-
-@section('content')
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -92,12 +87,61 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+
+        /* === CSS KHUSUS CAROUSEL === */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Tombol Navigasi Fade Effect */
+        .nav-btn {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .group:hover .nav-btn {
+            opacity: 1;
+        }
+        /* Mobile Adjustment */
+        @media (max-width: 768px) {
+            .nav-btn {
+                opacity: 0.8;
+            }
+        }
     </style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
-    <!-- Hero Section -->
-    <section class="gradient-bg text-white relative overflow-hidden">
-        <!-- Background Pattern -->
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Left: Logo -->
+            <div class="flex items-center">
+                <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Mega Jaya AC" class="h-10 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 green-glow">
+                </a>
+            </div>
+            <!-- Center: Nav -->
+            <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
+                <a href="{{ route('home') }}" class="hover:text-green-600 transition-colors">Home</a>
+                <a href="{{ route('about') }}" class="hover:text-green-600 transition-colors">About Us</a>
+                <a href="{{ route('services') }}" class="hover:text-green-600 transition-colors">Services</a>
+                <a href="{{ route('gallery') }}" class="hover:text-green-600 transition-colors">Gallery</a>
+                <a href="{{ route('products') }}" class="hover:text-green-600 transition-colors">Products</a>
+                <a href="{{ route('contact') }}" class="hover:text-green-600 transition-colors">Contact</a>
+            </nav>
+            <!-- Right: Buttons -->
+            <div class="flex items-center space-x-4">
+                <a href="{{ route('login') }}" class="text-gray-700 hidden md:block hover:text-green-600 transition-colors">Log in</a>
+                <a href="{{ route('register') }}" class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="gradient-bg text-white relative overflow-hidden pt-24">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
             <div class="absolute top-40 right-20 w-16 h-16 bg-white rounded-full"></div>
@@ -106,7 +150,6 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center relative z-10">
             <div class="max-w-4xl mx-auto">
-                <!-- Badge -->
                 <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
                     <i class="fas fa-bolt text-yellow-300"></i>
                     <span class="text-sm font-medium">Layanan AC Profesional & Terpercaya</span>
@@ -136,10 +179,8 @@
         <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 dark:from-gray-900 to-transparent"></div>
     </section>
 
-    <!-- Konten Halaman -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
-        <!-- Bagian Jasa Service -->
         <section id="services" class="mb-20 fade-in">
             <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-3 bg-primary-50 dark:bg-primary-900/20 rounded-full px-6 py-3 mb-6">
@@ -155,20 +196,55 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse ($services as $service)
                     <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-md card-hover border border-gray-100 dark:border-gray-700 group">
-                        <!-- Header dengan gradient -->
-                        <div class="relative -mx-6 -mt-6 mb-6 rounded-t-2xl overflow-hidden">
-                            <div class="h-2 bg-gradient-to-r from-primary-400 to-primary-600"></div>
-                        </div>
                         
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-primary-50 dark:bg-primary-900/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fas fa-tools text-xl service-icon"></i>
+                        {{-- === BAGIAN GAMBAR / CAROUSEL (START) === --}}
+                        {{-- Class -mx-6 -mt-6 agar gambar full width mentok ke tepi card --}}
+                        <div class="relative h-56 bg-gray-100 dark:bg-gray-700 group/image -mx-6 -mt-6 mb-6 rounded-t-2xl overflow-hidden">
+                            @if($service->images->count() > 0)
+                                {{-- 1. CONTAINER GAMBAR (ID Unik: carousel-home-ID) --}}
+                                <div id="carousel-home-{{ $service->id }}" class="flex overflow-x-auto snap-x snap-mandatory h-full scrollbar-hide w-full scroll-smooth">
+                                    @foreach($service->images as $index => $image)
+                                        <div class="w-full flex-shrink-0 snap-center h-full relative">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" 
+                                                 alt="{{ $service->name }}" 
+                                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                {{-- 2. TOMBOL NAVIGASI (Jika gambar > 1) --}}
+                                @if($service->images->count() > 1)
+                                    <button onclick="document.getElementById('carousel-home-{{ $service->id }}').scrollBy({left: -300, behavior: 'smooth'})" 
+                                            class="nav-btn absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black text-gray-800 dark:text-white p-2 rounded-full shadow-lg z-10 w-8 h-8 flex items-center justify-center transition-all transform hover:scale-110 focus:outline-none">
+                                        <i class="fas fa-chevron-left text-xs"></i>
+                                    </button>
+
+                                    <button onclick="document.getElementById('carousel-home-{{ $service->id }}').scrollBy({left: 300, behavior: 'smooth'})" 
+                                            class="nav-btn absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-black/50 hover:bg-white dark:hover:bg-black text-gray-800 dark:text-white p-2 rounded-full shadow-lg z-10 w-8 h-8 flex items-center justify-center transition-all transform hover:scale-110 focus:outline-none">
+                                        <i class="fas fa-chevron-right text-xs"></i>
+                                    </button>
+
+                                    {{-- Badge Counter --}}
+                                    <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md flex items-center gap-1 pointer-events-none">
+                                        <i class="fas fa-images"></i> {{ $service->images->count() }}
+                                    </div>
+                                @endif
+                            @else
+                                {{-- Fallback Jika Tidak Ada Gambar --}}
+                                <div class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-700 dark:to-gray-800 group-hover:bg-primary-100 transition-colors">
+                                    <i class="fas fa-tools text-4xl text-primary-200 dark:text-gray-600 mb-2"></i>
+                                    <span class="text-xs text-gray-400">No Image Available</span>
+                                </div>
+                            @endif
+
+                            {{-- Badge Tersedia (Overlay) --}}
+                            <div class="absolute top-3 right-3 z-20">
+                                <span class="bg-green-500/90 backdrop-blur-md text-white text-xs font-bold py-1 px-3 rounded-full shadow-sm flex items-center gap-1">
+                                    <i class="fas fa-check-circle"></i> Tersedia
+                                </span>
                             </div>
-                            <span class="bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 text-sm font-medium py-1 px-3 rounded-full">
-                                <i class="fas fa-check-circle mr-1"></i>
-                                Tersedia
-                            </span>
                         </div>
+                        {{-- === BAGIAN GAMBAR (END) === --}}
                         
                         <h3 class="text-xl font-semibold mb-3 text-gray-900 dark:text-white">{{ $service->name }}</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">{{ Str::limit($service->description, 100) }}</p>
@@ -207,7 +283,6 @@
             </div>
         </section>
 
-        <!-- Bagian Keunggulan -->
         <section class="mb-20 fade-in">
             <div class="bg-gradient-to-r from-primary-50 to-green-50 dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 md:p-12 border border-primary-100 dark:border-gray-700">
                 <div class="text-center mb-12">
@@ -249,7 +324,6 @@
             </div>
         </section>
 
-        <!-- Stats Section -->
         <section class="mb-20 fade-in">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 text-center shadow-sm border border-gray-100 dark:border-gray-700">
@@ -271,10 +345,8 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
         <section class="fade-in">
             <div class="whatsapp-gradient rounded-2xl p-8 md:p-12 text-white text-center relative overflow-hidden">
-                <!-- Background Pattern -->
                 <div class="absolute inset-0 opacity-10">
                     <div class="absolute top-5 right-10 w-16 h-16 bg-white rounded-full"></div>
                     <div class="absolute bottom-5 left-10 w-20 h-20 bg-white rounded-full"></div>
@@ -292,7 +364,6 @@
                         </a>
                     </div>
                     
-                    <!-- Info Tambahan -->
                     <div class="mt-8 flex flex-wrap justify-center gap-6 text-white/80 text-sm">
                         <div class="flex items-center gap-2">
                             <i class="fas fa-clock"></i>
@@ -312,29 +383,108 @@
         </section>
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Mega Jaya AC Logo" class="h-12 w-auto rounded-xl">
+                        <span class="text-2xl font-bold">Mega Jaya AC</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 max-w-md">
+                        Jasa service AC terpercaya dengan teknisi profesional, garansi resmi, dan pelayanan 24/7 untuk kenyamanan optimal ruangan Anda.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center hover:bg-green-700 transition-colors duration-300">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{{ route('home') }}" class="text-gray-400 hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="{{ route('about') }}" class="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="{{ route('services') }}" class="text-gray-400 hover:text-white transition-colors duration-300">Services</a></li>
+                        <li><a href="{{ route('gallery') }}" class="text-gray-400 hover:text-white transition-colors duration-300">Gallery</a></li>
+                        <li><a href="{{ route('products') }}" class="text-gray-400 hover:text-white transition-colors duration-300">Products</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact Info</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-3 text-green-500"></i>
+                            <span>Jl. Contoh No. 123, Kota</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-green-500"></i>
+                            <span>+62 812-3456-7890</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-green-500"></i>
+                            <span>info@megajaya-ac.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-green-500"></i>
+                            <span>24/7 Available</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        &copy; {{ date('Y') }} Mega Jaya AC. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
         // Fade in animation on scroll
         document.addEventListener('DOMContentLoaded', function() {
             const fadeElements = document.querySelectorAll('.fade-in');
-            
+
             const fadeInOnScroll = function() {
                 fadeElements.forEach(element => {
                     const elementTop = element.getBoundingClientRect().top;
                     const elementVisible = 150;
-                    
+
                     if (elementTop < window.innerHeight - elementVisible) {
                         element.classList.add('visible');
                     }
                 });
             };
-            
+
             // Check on load
             fadeInOnScroll();
-            
+
             // Check on scroll
             window.addEventListener('scroll', fadeInOnScroll);
         });
     </script>
 </body>
-</html>
-@endsection

@@ -12,7 +12,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Session Message -->
             @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-md">
                     {{ session('success') }}
@@ -26,6 +25,8 @@
                             <thead class="bg-gray-50 dark:bg-gray-700">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                                    {{-- KOLOM BARU: GALLERY --}}
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Gallery</th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Price</th>
                                     <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
                                 </tr>
@@ -34,6 +35,26 @@
                                 @forelse ($services as $service)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $service->name }}</td>
+                                    
+                                    {{-- DATA BARU: THUMBNAIL & COUNT --}}
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                                        @if($service->images->count() > 0)
+                                            <div class="flex items-center space-x-3">
+                                                {{-- Tampilkan Gambar Pertama sebagai Thumbnail --}}
+                                                <img src="{{ asset('storage/' . $service->images->first()->image_path) }}" 
+                                                     alt="Thumbnail" 
+                                                     class="w-12 h-12 rounded object-cover border border-gray-200 dark:border-gray-600">
+                                                
+                                                {{-- Badge Jumlah Gambar --}}
+                                                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                                                    {{ $service->images->count() }} Photos
+                                                </span>
+                                            </div>
+                                        @else
+                                            <span class="text-gray-400 italic text-xs">No images</span>
+                                        @endif
+                                    </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm">Rp {{ number_format($service->price, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-right">
                                         <a href="{{ route('admin.services.edit', $service) }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-200">Edit</a>
@@ -46,7 +67,8 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" class="px-6 py-4 whitespace-nowrap text-sm text-center">No services found.</td>
+                                    {{-- Ubah colspan jadi 4 karena kolom bertambah --}}
+                                    <td colspan="4" class="px-6 py-4 whitespace-nowrap text-sm text-center">No services found.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
