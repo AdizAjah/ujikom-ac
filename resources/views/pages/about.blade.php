@@ -14,48 +14,55 @@
 </head>
 <body class="bg-gray-50 text-white">
 
-    <!-- Header / Navbar (sesuai gambar) -->
-    <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+     <!-- Header / Navbar -->
+     <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Left: Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center space-x-3 group">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Mega Jaya AC" class="h-10 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300">
+                    <img src="{{ asset('images/logo.jpg') }}" alt="Mega Jaya AC" class="h-10 rounded-xl shadow-md group-hover:shadow-lg transition-all duration-300 green-glow">
                 </a>
             </div>
             <!-- Center: Nav -->
             <nav class="hidden md:flex space-x-8 text-gray-700 font-medium">
-                <a href="{{ route('about') }}" class="hover:text-green-600">About Us</a>
-                <a href="{{ route('services') }}" class="hover:text-green-600">Booking Service</a>
-                <a href="{{ route('gallery') }}" class="hover:text-green-600">Gallery</a>
-                <a href="{{ route('products') }}" class="hover:text-green-600">AC Unit</a>
-                <a href="{{ route('contact') }}" class="hover:text-green-600">Contact Us</a>
+                <a href="{{ route('home') }}" class="hover:text-green-600 transition-colors">Home</a>
+                <a href="{{ route('about') }}" class="hover:text-green-600 transition-colors">About Us</a>
+                <a href="{{ route('services') }}" class="hover:text-green-600 transition-colors">Services</a>
+                <a href="{{ route('gallery') }}" class="hover:text-green-600 transition-colors">Gallery</a>
+                <a href="{{ route('products') }}" class="hover:text-green-600 transition-colors">Products</a>
+                <a href="{{ route('contact') }}" class="hover:text-green-600 transition-colors">Contact</a>
             </nav>
             <!-- Right: Buttons -->
             <div class="flex items-center space-x-4">
-                <a href="{{ route('login') }}" class="text-gray-700 hidden md:block">Log in</a>
-                <a href="{{ route('register') }}" class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition">
+                <a href="{{ route('login') }}" class="text-gray-700 hidden md:block hover:text-green-600 transition-colors">Log in</a>
+                <a href="{{ route('register') }}" class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                     Get Started
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative bg-gradient-to-b from-green-500 to-green-600 pt-32 pb-24 overflow-hidden">
-        <div class="absolute inset-0 opacity-30">
-            <div class="absolute top-20 left-20 w-64 h-64 bg-green-400 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-32 w-96 h-96 bg-green-300 rounded-full blur-3xl"></div>
-        </div>
+  <!-- Hero Section – DIPERBAIKI -->
+<section class="relative bg-gradient-to-b from-green-500 to-green-600 pt-8 pb-24 overflow-hidden h-screen">
+    <!-- Background blur -->
+    <div class="absolute inset-0 opacity-30">
+        <div class="absolute top-20 left-20 w-64 h-64 bg-green-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-32 w-96 h-96 bg-green-300 rounded-full blur-3xl"></div>
+    </div>
 
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6">Tentang Kami</h1>
-            <p class="text-xl md:text-3xl font-light max-w-4xl mx-auto">
-                Mega Jaya AC – Solusi Terpercaya untuk Kebutuhan Pendingin Ruangan Anda
+    <!-- Container utama dengan Flexbox -->
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="flex flex-col items-center justify-center min-h-screen">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white text-center leading-tight">
+                Tentang Kami
+            </h1>
+            <p class="mt-8 text-lg md:text-2xl lg:text-3xl font-light text-white text-center max-w-5xl leading-relaxed">
+                Mega Jaya AC – Solusi Terpercaya untuk Kebutuhan<br class="hidden md:block">
+                Pendingin Ruangan Anda
             </p>
         </div>
-    </section>
-
+    </div>
+</section>
     <!-- Komitmen Kami -->
     <section class="py-20 bg-gray-900">
         <div class="container mx-auto px-6">

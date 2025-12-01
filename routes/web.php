@@ -30,12 +30,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 // Rute bawaan Breeze (Dashboard User Biasa)
 Route::get('/dashboard', function () {
-    // Arahkan admin ke admin dashboard, user ke user dashboard
-    // if (Auth::user()->role === 'admin') { // <-- PERBAIKAN LINTER
-    //     return redirect()->route('');
-    // }
-    // Arahkan user ke halaman 'My Bookings' sebagai dashboard utama mereka
-    return redirect()->route('home');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Rute Profil Bawaan Breeze

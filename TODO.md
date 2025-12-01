@@ -1,13 +1,7 @@
-# TODO: Add Navbar to Welcome Page
+# TODO: Implement Role-Based Redirection for Login/Register
 
-## Tasks
-- [x] Add navbar HTML to welcome.blade.php before the hero section
-- [x] Include navigation links for Home, About, Services, Gallery, Products, Contact
-- [x] Add login and register buttons
-- [x] Ensure navbar is responsive
-- [x] Test that routes work correctly
-
-## Notes
-- Navbar should match the style of about.blade.php navbar
-- Use Laravel route helpers for links
-- Navbar should be fixed at top
+## Steps to Complete:
+- [ ] Update AuthenticatedSessionController::store to check user role and redirect accordingly
+- [ ] Update RegisteredUserController::store to set default role 'user' and check role for redirection
+- [ ] Modify the 'dashboard' route in web.php to return dashboard view for users
+- [ ] Test the changes for both admin and user roles

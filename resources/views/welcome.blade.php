@@ -141,7 +141,7 @@
         </div>
     </header>
 
-    <section class="gradient-bg text-white relative overflow-hidden pt-24">
+    <section class="text-white relative overflow-hidden pt-24 h-screen" style="background: linear-gradient(135deg, rgba(22, 163, 74, 0.7) 0%, rgba(34, 197, 94, 0.7) 100%), url('{{ asset('images/tukang ac.jpg') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-10 left-10 w-20 h-20 bg-white rounded-full"></div>
             <div class="absolute top-40 right-20 w-16 h-16 bg-white rounded-full"></div>
@@ -154,8 +154,7 @@
                     <i class="fas fa-bolt text-yellow-300"></i>
                     <span class="text-sm font-medium">Layanan AC Profesional & Terpercaya</span>
                 </div>
-                
-                <img src="/images/logo.jpg" alt="Mega Jaya AC Logo" class="mx-auto mb-6 w-32 h-32 object-contain shadow-2xl rounded-full">
+
                 <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                     Solusi
                     <span class="text-white/90">Pendingin Ruangan</span>
